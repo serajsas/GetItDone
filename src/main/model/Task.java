@@ -4,7 +4,7 @@ package model;
  * This class represents a task that has a title, description, date, status and due date
  */
 
-public abstract class Task {
+public class Task {
     public static final String COMPLETE_STRING = "Complete";
     public static final String INCOMPLETE_STRING = "Incomplete";
     public static final String INREVIEW_STRING = "InReview";

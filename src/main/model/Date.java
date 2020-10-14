@@ -11,7 +11,7 @@ public class Date {
     private int year;
     private Calendar calendar;
 
-    //EFFECTS:Constructs a date
+    //EFFECTS:Constructs a date with day, month and year
     public Date(int day, int month, int year) {
         calendar = new GregorianCalendar();
         this.day = day;
@@ -19,6 +19,7 @@ public class Date {
         this.year = year;
     }
 
+    //EFFECTS:Constructs a date with empty fields
     public Date() {
     }
 
