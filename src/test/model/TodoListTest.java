@@ -14,13 +14,14 @@ public class TodoListTest {
     public void setUp() {
         todoList = new TodoList();
     }
+
     @Test
-    public void getTaskListTestEmpty(){
+    public void getTaskListTestEmpty() {
         assertTrue(todoList.getTaskList().isEmpty());
     }
 
     @Test
-    public void getTaskListTestNotEmpty(){
+    public void getTaskListTestNotEmpty() {
         Task task = new IncompleteTask("1", "1");
         Task task1 = new InReviewTask("2", "2");
         Task task2 = new CompleteTask("3", "3");
@@ -28,9 +29,9 @@ public class TodoListTest {
         assertFalse(todoList.addTask(task1));
         assertFalse(todoList.addTask(task2));
         assertFalse(todoList.getTaskList().isEmpty());
-        assertEquals(todoList.getTaskList().get("1"),task);
-        assertEquals(todoList.getTaskList().get("2"),task1);
-        assertEquals(todoList.getTaskList().get("3"),task2);
+        assertEquals(todoList.getTaskList().get("1"), task);
+        assertEquals(todoList.getTaskList().get("2"), task1);
+        assertEquals(todoList.getTaskList().get("3"), task2);
     }
 
     @Test
@@ -82,7 +83,7 @@ public class TodoListTest {
         Task task = new IncompleteTask("1", "1");
         Task task1 = new IncompleteTask("2", "2");
         todoList.setProgress();
-        assertEquals(todoList.getProgress(),0);
+        assertEquals(todoList.getProgress(), 0);
         assertFalse(todoList.addTask(task));
         assertFalse(todoList.addTask(task1));
         todoList.changeToComplete("1");
@@ -132,33 +133,33 @@ public class TodoListTest {
     }
 
     @Test
-    public void seeTaskDescriptionTestDoesNotExist(){
+    public void seeTaskDescriptionTestDoesNotExist() {
         Task task = new IncompleteTask("Solve", "500");
         Task task1 = new IncompleteTask("2", "2");
         todoList.addTask(task);
         todoList.addTask(task1);
-        assertEquals(todoList.seeTaskDescription("4"),"false");
-        assertEquals(todoList.seeTaskDescription("Solve"),"500");
+        assertEquals(todoList.seeTaskDescription("4"), "false");
+        assertEquals(todoList.seeTaskDescription("Solve"), "500");
     }
 
     @Test
-    public void changeToCompleteTest(){
+    public void changeToCompleteTest() {
         Task task = new IncompleteTask("Solve", "500");
         todoList.addTask(task);
-        todoList.changeToComplete("1");
-        assertEquals(todoList.getNumberOfCompleteTasks(),0);
-        todoList.changeToComplete("Solve");
-        assertEquals(todoList.getNumberOfCompleteTasks(),1);
+        assertFalse(todoList.changeToComplete("1"));
+        assertEquals(todoList.getNumberOfCompleteTasks(), 0);
+        assertTrue(todoList.changeToComplete("Solve"));
+        assertEquals(todoList.getNumberOfCompleteTasks(), 1);
     }
 
     @Test
-    public void changeToInReviewTest(){
+    public void changeToInReviewTest() {
         Task task = new IncompleteTask("Solve", "500");
         todoList.addTask(task);
-        todoList.changeToInReview("1");
-        assertEquals(todoList.getNumberOfInReviewTasks(),0);
-        todoList.changeToInReview("Solve");
-        assertEquals(todoList.getNumberOfInReviewTasks(),1);
+        assertFalse(todoList.changeToInReview("1"));
+        assertEquals(todoList.getNumberOfInReviewTasks(), 0);
+        assertTrue(todoList.changeToInReview("Solve"));
+        assertEquals(todoList.getNumberOfInReviewTasks(), 1);
     }
 
 }

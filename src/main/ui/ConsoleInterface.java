@@ -159,7 +159,12 @@ public class ConsoleInterface {
     private void reviewTask() {
         System.out.println("Enter the name of the task to change its status to in review");
         String name = input.nextLine();
-        todoList.changeToInReview(name.trim());
+
+        if (todoList.changeToInReview(name.trim()) == false) {
+            System.out.println("This task does not exist!");
+        } else {
+            System.out.println("Task has been successfully updated");
+        }
     }
 
     //MODIFIES: this
@@ -167,7 +172,12 @@ public class ConsoleInterface {
     private void completeTask() {
         System.out.println("Enter the name of the task to change its status to complete");
         String name = input.nextLine();
-        todoList.changeToComplete(name.trim());
+        if (todoList.changeToComplete(name.trim()) == false) {
+            System.out.println("This task does not exist!");
+        } else {
+            System.out.println("Task has been successfully updated");
+        }
+
     }
 
 

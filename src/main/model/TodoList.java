@@ -34,25 +34,32 @@ public class TodoList {
 
 
     //MODIFIES: this
-    //EFFECTS: Changes the task to InReviewTask
-    public void changeToInReview(String name) {
+    //EFFECTS: Changes the task to InReviewTask and returns true if it exists, otherwise returns false
+    public boolean changeToInReview(String name) {
         if (taskList.containsKey(name)) {
             InReviewTask inReviewTask = new InReviewTask(taskList.get(name).taskTitle,
                     taskList.get(name).description);
             inReviewTask.setDueDate(taskList.get(name).getDueDate());
             taskList.put(inReviewTask.taskTitle, inReviewTask);
+            return true;
+        } else {
+            return false;
         }
     }
 
     //MODIFIES: this
-    //EFFECTS: Changes the task to CompleteTask
-    public void changeToComplete(String name) {
+    //EFFECTS: Changes the task to CompleteTask and returns true if it exists, otherwise returns false
+    public boolean changeToComplete(String name) {
         if (taskList.containsKey(name)) {
             CompleteTask completeTask = new CompleteTask(taskList.get(name).taskTitle,
                     taskList.get(name).description);
             completeTask.setDueDate(taskList.get(name).getDueDate());
             taskList.put(completeTask.taskTitle, completeTask);
+            return true;
+        } else {
+            return false;
         }
+
     }
 
     //MODIFIES: this
