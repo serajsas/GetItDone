@@ -64,9 +64,13 @@ public class TodoList {
 
     //MODIFIES: this
     //EFFECTS: Remove the task from list of tasks
-    public void deleteTask(String taskTitle) {
-        taskList.remove(taskTitle);
-
+    public boolean deleteTask(String taskTitle) {
+        if (!taskList.containsKey(taskTitle)) {
+            return false;
+        } else {
+            taskList.remove(taskTitle);
+            return true;
+        }
     }
 
     //EFFECTS: Returns the task description if it exists otherwise, returns false string

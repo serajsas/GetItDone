@@ -113,7 +113,7 @@ public class TodoListTest {
         Task task1 = new IncompleteTask("2", "2");
         assertFalse(todoList.addTask(task));
         assertFalse(todoList.addTask(task1));
-        todoList.deleteTask("5");
+        assertFalse(todoList.deleteTask("5"));
         assertEquals(todoList.getNumberOfInCompleteTasks(), 2);
         assertEquals(todoList.getSize(), 2);
     }
@@ -124,10 +124,10 @@ public class TodoListTest {
         Task task1 = new IncompleteTask("2", "2");
         assertFalse(todoList.addTask(task));
         assertFalse(todoList.addTask(task1));
-        todoList.deleteTask("1");
+        assertTrue(todoList.deleteTask("1"));
         assertEquals(todoList.getNumberOfInCompleteTasks(), 1);
         assertEquals(todoList.getSize(), 1);
-        todoList.deleteTask("2");
+        assertTrue(todoList.deleteTask("2"));
         assertEquals(todoList.getNumberOfInCompleteTasks(), 0);
         assertEquals(todoList.getSize(), 0);
     }

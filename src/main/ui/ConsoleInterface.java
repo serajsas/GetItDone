@@ -145,7 +145,13 @@ public class ConsoleInterface {
     private void deleteTask() {
         System.out.println("Enter the name of the task to delete");
         String name = input.nextLine();
-        todoList.deleteTask(name.trim());
+        if (todoList.deleteTask(name.trim()) == false) {
+            System.out.println("This task does not exist ");
+        } else {
+            todoList.deleteTask(name.trim());
+            System.out.println("Task has been successfully deleted");
+        }
+
     }
 
     //EFFECTS: Prints out the progress of the user
