@@ -122,8 +122,13 @@ public class ConsoleInterface {
 
     //EFFECTS:Prints the list of all tasks
     private void accessToDoTasks() {
+        boolean isFound = false;
         for (Map.Entry<String, Task> taskEntry : todoList.getTaskList().entrySet()) {
             System.out.println(taskEntry.getValue().toString());
+            isFound = true;
+        }
+        if (!isFound) {
+            System.out.println("The todo list is empty :)");
         }
     }
 
@@ -189,28 +194,43 @@ public class ConsoleInterface {
 
     //EFFECTS: Prints all the tasks that are in review
     private void accessInReviewTasks() {
+        boolean isFound = false;
         for (Map.Entry<String, Task> taskEntry : todoList.getTaskList().entrySet()) {
             if (taskEntry.getValue().getStatus().equals(Task.INREVIEW_STRING)) {
                 System.out.println(taskEntry.getValue());
+                isFound = true;
             }
+        }
+        if (!isFound) {
+            System.out.println("You don't have in review tasks");
         }
     }
 
     //EFFECTS: Prints all the tasks that are completed
     private void accessCompleteTasks() {
+        boolean isFound = false;
         for (Map.Entry<String, Task> taskEntry : todoList.getTaskList().entrySet()) {
             if (taskEntry.getValue().getStatus().equals(Task.COMPLETE_STRING)) {
                 System.out.println(taskEntry.getValue().toString());
+                isFound = true;
             }
+        }
+        if (!isFound) {
+            System.out.println("You don't have complete tasks");
         }
     }
 
     //EFFECTS: Prints all the tasks that are incomplete
     private void accessIncompleteTasks() {
+        boolean isFound = false;
         for (Map.Entry<String, Task> taskEntry : todoList.getTaskList().entrySet()) {
             if (taskEntry.getValue().getStatus().equals(Task.INCOMPLETE_STRING)) {
                 System.out.println(taskEntry.getValue().toString());
+                isFound = true;
             }
+        }
+        if (!isFound) {
+            System.out.println("You don't have incomplete tasks");
         }
     }
 
