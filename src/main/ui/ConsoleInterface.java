@@ -1,7 +1,11 @@
 package ui;
 
 import model.*;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -10,10 +14,13 @@ import java.util.Scanner;
  */
 
 public class ConsoleInterface {
+    public static final String JSON_STORE = "data/savedTasks";
 
     private TodoList todoList;
 
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the To-do Application
     public ConsoleInterface() {
@@ -47,6 +54,8 @@ public class ConsoleInterface {
     private void init() {
         todoList = new TodoList();
         input = new Scanner(System.in);
+        jsonReader = new JsonReader(JSON_STORE);
+        jsonWriter = new JsonWriter(JSON_STORE);
     }
 
     //EFFECTS: Displays the menu of options to user
@@ -62,6 +71,8 @@ public class ConsoleInterface {
         System.out.println("\th -> Access complete tasks");
         System.out.println("\ti -> Access in review tasks");
         System.out.println("\tj -> See your progress");
+        System.out.println("\ts -> save your tasks");
+        System.out.println("\tl -> load your saved tasks");
         System.out.println("\tq -> quit");
     }
 
@@ -70,7 +81,7 @@ public class ConsoleInterface {
     private void processCommand(String command) {
         if (command.matches("[a-e]")) {
             taskEditors(command);
-        } else if (command.matches("[f-j]")) {
+        } else if (command.matches("([f-j]|s|l)")) {
             taskListEditor(command);
         } else {
             System.out.println("Selection is invalid...");
@@ -117,8 +128,38 @@ public class ConsoleInterface {
             case "j":
                 checkProgress();
                 break;
+            case "s":
+                saveTaskList();
+                break;
+            case "l":
+                loadTaskList();
+                break;
         }
     }
+
+    // EFFECTS: saves the workroom to file
+    private void saveTaskList() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(todoList);
+            jsonWriter.close();
+            System.out.println("Saved " + todoList.getTaskList() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadTaskList() {
+        try {
+            todoList = jsonReader.read();
+            System.out.println("Loaded your task list from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
 
     //EFFECTS:Prints the list of all tasks
     private void accessToDoTasks() {
@@ -161,7 +202,7 @@ public class ConsoleInterface {
 
     //EFFECTS: Prints out the progress of the user
     private void checkProgress() {
-        todoList.setProgress();
+        todoList.calculateProgress();
         System.out.println(todoList.getProgress() + "% is completed");
     }
 
@@ -298,6 +339,5 @@ public class ConsoleInterface {
         task.setDueDate(date);
         System.out.println("Your task is: " + task.toString());
     }
-
 
 }

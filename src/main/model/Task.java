@@ -4,7 +4,10 @@ package model;
  * This class represents a task that has a title, description, date, status and due date
  */
 
-public class Task {
+import org.json.JSONObject;
+import persistence.Writable;
+
+public class Task implements Writable {
     public static final String COMPLETE_STRING = "Complete";
     public static final String INCOMPLETE_STRING = "Incomplete";
     public static final String INREVIEW_STRING = "InReview";
@@ -13,11 +16,19 @@ public class Task {
     protected String status;
     private Date dueDate;
 
-    //EFFECTS:Constructs  task
+    //EFFECTS:Constructs  task with tasktTtle and description
     public Task(String taskTitle, String description) {
         this.taskTitle = taskTitle;
         this.description = description;
         this.dueDate = null;
+    }
+
+    //EFFECTS:Constructs  task with all the fields
+    public Task(String taskTitle, String description, String status, Date dueDate) {
+        this.taskTitle = taskTitle;
+        this.description = description;
+        this.status = status;
+        this.dueDate = dueDate;
     }
 
     public String getTaskTitle() {
@@ -36,6 +47,9 @@ public class Task {
         this.dueDate = dueDate;
     }
 
+    public String getDescription() {
+        return description;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -57,5 +71,15 @@ public class Task {
                 + ", status='" + status + '\''
                 + ", dueDate=" + dueDate
                 + '}';
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("taskTitle", taskTitle);
+        json.put("description", description);
+        json.put("status", status);
+        json.put("dueDate", dueDate);
+        return json;
     }
 }

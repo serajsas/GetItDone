@@ -1,13 +1,18 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /*
  * This class represents a To-do List having a task list and progress achieved by the user
  */
 
-public class TodoList {
+public class TodoList implements Writable {
     private static final String FALSE = "false";
     private HashMap<String, Task> taskList;
 
@@ -87,14 +92,14 @@ public class TodoList {
 
     //MODIFIES:this
     //EFFECTS: Calculates the progress of the user based on the number of tasks remaining to complete
-    public void setProgress() {
+    public void calculateProgress() {
         int total = getNumberOfInCompleteTasks()
                 + getNumberOfCompleteTasks()
                 + getNumberOfInReviewTasks();
         if (total == 0) {
-            this.progress = 0;
+            setProgress(0);
         } else {
-            this.progress = 100 * getNumberOfCompleteTasks() / total;
+            setProgress(100 * getNumberOfCompleteTasks() / total);
 
         }
     }
@@ -111,7 +116,7 @@ public class TodoList {
     public int getNumberOfInReviewTasks() {
         int counter = 0;
         for (Map.Entry<String, Task> stringTaskEntry : taskList.entrySet()) {
-            if (stringTaskEntry.getValue() instanceof InReviewTask) {
+            if (stringTaskEntry.getValue().getStatus().equals("InReview")) {
                 counter++;
             }
         }
@@ -122,7 +127,7 @@ public class TodoList {
     public int getNumberOfCompleteTasks() {
         int counter = 0;
         for (Map.Entry<String, Task> stringTaskEntry : taskList.entrySet()) {
-            if (stringTaskEntry.getValue() instanceof CompleteTask) {
+            if (stringTaskEntry.getValue().getStatus().equals("Complete")) {
                 counter++;
             }
         }
@@ -133,7 +138,7 @@ public class TodoList {
     public int getNumberOfInCompleteTasks() {
         int counter = 0;
         for (Map.Entry<String, Task> stringTaskEntry : taskList.entrySet()) {
-            if (stringTaskEntry.getValue() instanceof IncompleteTask) {
+            if (stringTaskEntry.getValue().getStatus().equals("Incomplete")) {
                 counter++;
             }
         }
@@ -146,9 +151,36 @@ public class TodoList {
         return progress;
     }
 
+    public void setProgress(int progress) {
+        this.progress = progress;
+    }
+
     //EFFECTS: Returns the size of the task list
     public int getSize() {
         return taskList.size();
     }
 
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("taskList", tasksToJson());
+        calculateProgress();
+        json.put("progress", progress);
+        return json;
+    }
+
+    //EFFECTS: returns tasks in this todolist to JSON array
+    private JSONArray tasksToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (Map.Entry<String, Task> taskEntry : taskList.entrySet()) {
+            jsonArray.put(taskEntry.getValue().toJson());
+        }
+        return jsonArray;
+    }
+
+    @Override
+    public String toString() {
+        return "TodoList{" + "taskList=" + taskList + ", progress=" + progress + '}';
+    }
 }

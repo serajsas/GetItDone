@@ -64,4 +64,13 @@ public class DateTest {
     public void toStringTest() {
         assertEquals(date.toString(), "Date{day=9, month=10, year=2020}");
     }
+
+    @Test
+    void equalsTes(){
+        assertTrue(date.equals(date));
+        assertFalse(date.equals(new Task("1","1")));
+        Date date1 = new Date(9,10,2020);
+        assertTrue(date1.equals(date));
+        assertEquals(date1.hashCode(),date.hashCode());
+    }
 }

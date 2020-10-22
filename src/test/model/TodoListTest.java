@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -82,14 +83,14 @@ public class TodoListTest {
     public void getProgressTestHalfComplete() {
         Task task = new IncompleteTask("1", "1");
         Task task1 = new IncompleteTask("2", "2");
-        todoList.setProgress();
+        todoList.calculateProgress();
         assertEquals(todoList.getProgress(), 0);
         assertFalse(todoList.addTask(task));
         assertFalse(todoList.addTask(task1));
         todoList.changeToComplete("1");
         assertEquals(todoList.getNumberOfInCompleteTasks(), 1);
         assertEquals(todoList.getNumberOfCompleteTasks(), 1);
-        todoList.setProgress();
+        todoList.calculateProgress();
         assertEquals(todoList.getProgress(), 50);
     }
 
@@ -103,7 +104,7 @@ public class TodoListTest {
         assertFalse(todoList.addTask(task2));
         todoList.changeToComplete("1");
         todoList.changeToComplete("3");
-        todoList.setProgress();
+        todoList.calculateProgress();
         assertEquals(todoList.getProgress(), 100);
     }
 
@@ -160,6 +161,30 @@ public class TodoListTest {
         assertEquals(todoList.getNumberOfInReviewTasks(), 0);
         assertTrue(todoList.changeToInReview("Solve"));
         assertEquals(todoList.getNumberOfInReviewTasks(), 1);
+    }
+
+    @Test
+    void toJsonTest(){
+        Task incompleteTask = new IncompleteTask("MATH", "Finish the webwork");
+        Task completeTask = new CompleteTask("CPSC 210", "Finish phase 1");
+        Task inReview = new InReviewTask("CHEM", "Finish the hw");
+        incompleteTask.setDueDate(new Date(25, 10, 2020));
+        completeTask.setDueDate(new Date(22, 10, 2020));
+        inReview.setDueDate(new Date(22, 11, 2020));
+        todoList.addTask(incompleteTask);
+        todoList.addTask(completeTask);
+        todoList.addTask(inReview);
+        JSONObject jsonObject = todoList.toJson();
+        assertEquals(jsonObject.get("progress"),33);
+    }
+
+    @Test
+    void toStringTest(){
+        Task incompleteTask = new IncompleteTask("MATH", "Finish the webwork");
+        todoList.addTask(incompleteTask);
+        assertEquals(todoList.toString(),"TodoList{taskList={MATH=Task{taskTitle='MATH', " +
+                "description='Finish the webwork', status='Incomplete', dueDate=null}}, progress=0}");
+
     }
 
 }

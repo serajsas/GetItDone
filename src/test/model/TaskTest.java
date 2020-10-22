@@ -21,6 +21,7 @@ class TaskTest {
 
     @Test
     public void taskConstructorTest(){
+        Task task3 = new Task("4","4","Incomplete",new Date(22,10,2020));
         Date date = new Date();
         date = date.getCurrentDate();
 
@@ -38,7 +39,10 @@ class TaskTest {
         assertEquals(task.getDueDate(),date);
         assertEquals(task1.getDueDate(),date);
         assertEquals(task2.getDueDate(),date);
+
+        assertEquals(task3.getDescription(),"4");
     }
+
 
     @Test
     public void equalsTest(){
@@ -52,6 +56,7 @@ class TaskTest {
 
         Task task4 = new IncompleteTask("1","4");
         assertTrue(task.equals(task4));
+        assertTrue(task.equals(task));
 
         assertFalse(task.equals(date));
     }
