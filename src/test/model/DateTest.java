@@ -66,11 +66,21 @@ public class DateTest {
     }
 
     @Test
-    void equalsTes(){
-        assertTrue(date.equals(date));
-        assertFalse(date.equals(new Task("1","1")));
+    void equalsTest(){
         Date date1 = new Date(9,10,2020);
-        assertTrue(date1.equals(date));
+        Date date2 = null;
+        Date date3 = new Date(9,10,2030);
+        Date date4 = new Date(9,11,2020);
+        Date date5 = new Date(10,11,2020);
+
+        assertTrue(date.equals(date));
+        assertTrue(date.equals(date1));
+
+        assertFalse(date.equals(new Task("1","1")));
+        assertFalse(date.equals(date2));
+        assertFalse(date.equals(date3));
+        assertFalse(date.equals(date4));
+        assertFalse(date.equals(date5));
         assertEquals(date1.hashCode(),date.hashCode());
     }
 }
