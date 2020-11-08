@@ -68,12 +68,10 @@ public class JsonReader {
         String dueDate = jsonObject.getString("dueDate");
 
 
-        String[] dateData = dueDate.split("=");
-        Date date = new Date(Integer.parseInt(dateData[1].substring(0,2)),
-                Integer.parseInt(dateData[2].substring(0,2)),
-                Integer.parseInt(dateData[3].substring(0,4)));
-
+        Date date = new Date();
+        date = date.getDateFromJson(dueDate);
         Task task = new Task(taskTitle, description, status, date);
         todoList.addTask(task);
     }
+
 }

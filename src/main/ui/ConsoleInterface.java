@@ -137,7 +137,7 @@ public class ConsoleInterface {
         }
     }
 
-    // EFFECTS: saves the workroom to file
+    // EFFECTS: saves the Todolist to file
     private void saveTaskList() {
         try {
             jsonWriter.open();
@@ -150,7 +150,7 @@ public class ConsoleInterface {
     }
 
     // MODIFIES: this
-    // EFFECTS: loads workroom from file
+    // EFFECTS: loads Todolist from file
     private void loadTaskList() {
         try {
             todoList = jsonReader.read();
@@ -325,7 +325,7 @@ public class ConsoleInterface {
     private void enterValidDate(Task task) {
         Date date;
         do {
-            System.out.println("Enter the date in the format DD/MM/YY as integers");
+            System.out.println("Enter the date in the format DD/MM/YYYY as integers");
             String dueDate = input.nextLine();
             String[] dateData = dueDate.split("/");
             date = new Date(Integer.parseInt(dateData[0]),

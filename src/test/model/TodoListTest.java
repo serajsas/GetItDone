@@ -4,6 +4,9 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 //This class is testing the todolist class
@@ -185,6 +188,33 @@ public class TodoListTest {
         assertEquals(todoList.toString(),"TodoList{taskList={MATH=Task{taskTitle='MATH', " +
                 "description='Finish the webwork', status='Incomplete', dueDate=null}}, progress=0}");
 
+    }
+
+    @Test
+    void loadSaveTest(){
+        try {
+            todoList.saveTaskList();
+        } catch (FileNotFoundException e) {
+            fail();
+        }
+        try {
+            assertEquals(todoList.loadTaskList().getSize(),0);
+        } catch (IOException e) {
+            fail();
+        }
+        Task task = new IncompleteTask("CPSC","Phase 3");
+        task.setDueDate(new Date(07,11,2020));
+        todoList.addTask(task);
+        try {
+            todoList.saveTaskList();
+        } catch (FileNotFoundException e) {
+            fail();
+        }
+        try {
+            assertEquals(todoList.loadTaskList().getSize(),1);
+        } catch (IOException e) {
+            fail();
+        }
     }
 
 }

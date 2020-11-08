@@ -2,11 +2,16 @@ package model;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 import persistence.Writable;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
+
+import static ui.ConsoleInterface.JSON_STORE;
 
 /*
  * This class represents a To-do List having a task list and progress achieved by the user
@@ -179,8 +184,25 @@ public class TodoList implements Writable {
         return jsonArray;
     }
 
+
     @Override
     public String toString() {
         return "TodoList{" + "taskList=" + taskList + ", progress=" + progress + '}';
     }
+
+    // MODIFIES: this
+    // EFFECTS: loads Todolist from file
+    public TodoList loadTaskList() throws IOException {
+        JsonReader jsonReader = new JsonReader(JSON_STORE);
+        return jsonReader.read();
+    }
+
+    // EFFECTS: saves the Todolist to file
+    public void saveTaskList() throws FileNotFoundException {
+        JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
+        jsonWriter.open();
+        jsonWriter.write(this);
+        jsonWriter.close();
+    }
+
 }

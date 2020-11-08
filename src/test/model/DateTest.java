@@ -24,6 +24,23 @@ public class DateTest {
     }
 
     @Test
+    public void getDateFromGUITest() {
+        String dateString = "09/10/2020";
+        String dateString1 = "9/10/2020";
+        String dateString2 = "5/10/2020";
+        Date date1 = new Date();
+        date1 = date1.getDateFromGUI(dateString);
+        Date date2 = new Date();
+        date2 = date2.getDateFromGUI(dateString1);
+        Date date3 = new Date();
+        date3 = date3.getDateFromGUI(dateString2);
+        assertTrue(date.equals(date1));
+        assertTrue(date.equals(date2));
+        assertFalse(date.equals(date3));
+    }
+
+
+    @Test
     public void getCurrentDateTest() {
         Date date1 = new Date();
         date1 = date1.getCurrentDate();

@@ -62,6 +62,36 @@ public class Date {
 
     }
 
+    //EFFECTS: Takes in a string and changes it into a date and returns it
+    public Date getDateFromJson(String dueDate) {
+
+        String[] dateData = dueDate.split(",");
+        String day = dateData[0];
+        String[] dayData = day.split("=");
+
+        String month = dateData[1];
+        String[] monthData = month.split("=");
+
+        String year = dateData[2];
+        String[] yearData = year.split("=");
+
+        return new Date(Integer.parseInt(dayData[1]), Integer.parseInt(monthData[1]),
+                Integer.parseInt(yearData[1].substring(0, 4)));
+    }
+
+    //EFFECTS: Takes in a string and changes it into a date and returns it
+    public Date getDateFromGUI(String dueDate) {
+        String[] dateData = dueDate.split("/");
+        String day = dateData[0];
+
+        String month = dateData[1];
+
+        String year = dateData[2];
+
+        return new Date(Integer.parseInt(day), Integer.parseInt(month),
+                Integer.parseInt(year.substring(0,4)));
+    }
+
     @Override
     public String toString() {
         return "Date{"
