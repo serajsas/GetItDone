@@ -7,8 +7,6 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
-import java.util.HashMap;
-
 public class Task implements Writable {
     public static final String COMPLETE_STRING = "Complete";
     public static final String INCOMPLETE_STRING = "Incomplete";

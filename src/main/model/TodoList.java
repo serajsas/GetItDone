@@ -19,7 +19,7 @@ import static ui.ConsoleInterface.JSON_STORE;
 
 public class TodoList implements Writable {
     private static final String FALSE = "false";
-    private HashMap<String, Task> taskList;
+    private final HashMap<String, Task> taskList;
 
     private int progress;
 

@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.HashMap;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -47,9 +46,9 @@ public class JsonReaderTest extends JsonTest {
             assertEquals(todoList.getSize(), 3);
             assertEquals(todoList.getProgress(), 33);
             HashMap<String, Task> taskList = todoList.getTaskList();
-            assertEquals(taskList.get("CHEM").getStatus(),"InReview");
-            assertEquals(taskList.get("MATH").getDescription(),"Finish the webwork");
-            assertEquals(taskList.get("CPSC 210").getDueDate(),new Date(22,10,2020));
+            assertEquals(taskList.get("CHEM").getStatus(), "InReview");
+            assertEquals(taskList.get("MATH").getDescription(), "Finish the webwork");
+            assertEquals(taskList.get("CPSC 210").getDueDate(), new Date(22, 10, 2020));
         } catch (IOException e) {
             fail("IOException is not supposed to be thrown");
         }

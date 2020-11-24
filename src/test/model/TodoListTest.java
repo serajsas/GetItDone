@@ -167,7 +167,7 @@ public class TodoListTest {
     }
 
     @Test
-    void toJsonTest(){
+    void toJsonTest() {
         Task incompleteTask = new IncompleteTask("MATH", "Finish the webwork");
         Task completeTask = new CompleteTask("CPSC 210", "Finish phase 1");
         Task inReview = new InReviewTask("CHEM", "Finish the hw");
@@ -178,32 +178,32 @@ public class TodoListTest {
         todoList.addTask(completeTask);
         todoList.addTask(inReview);
         JSONObject jsonObject = todoList.toJson();
-        assertEquals(jsonObject.get("progress"),33);
+        assertEquals(jsonObject.get("progress"), 33);
     }
 
     @Test
-    void toStringTest(){
+    void toStringTest() {
         Task incompleteTask = new IncompleteTask("MATH", "Finish the webwork");
         todoList.addTask(incompleteTask);
-        assertEquals(todoList.toString(),"TodoList{taskList={MATH=Task{taskTitle='MATH', " +
+        assertEquals(todoList.toString(), "TodoList{taskList={MATH=Task{taskTitle='MATH', " +
                 "description='Finish the webwork', status='Incomplete', dueDate=null}}, progress=0}");
 
     }
 
     @Test
-    void loadSaveTest(){
+    void loadSaveTest() {
         try {
             todoList.saveTaskList();
         } catch (FileNotFoundException e) {
             fail();
         }
         try {
-            assertEquals(todoList.loadTaskList().getSize(),0);
+            assertEquals(todoList.loadTaskList().getSize(), 0);
         } catch (IOException e) {
             fail();
         }
-        Task task = new IncompleteTask("CPSC","Phase 3");
-        task.setDueDate(new Date(07,11,2020));
+        Task task = new IncompleteTask("CPSC", "Phase 3");
+        task.setDueDate(new Date(07, 11, 2020));
         todoList.addTask(task);
         try {
             todoList.saveTaskList();
@@ -211,7 +211,7 @@ public class TodoListTest {
             fail();
         }
         try {
-            assertEquals(todoList.loadTaskList().getSize(),1);
+            assertEquals(todoList.loadTaskList().getSize(), 1);
         } catch (IOException e) {
             fail();
         }

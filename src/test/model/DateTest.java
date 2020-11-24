@@ -51,15 +51,15 @@ public class DateTest {
 
     @Test
     public void isDateValidTest() {
-        Date date1 = new Date(31,10,2022);
-        Date date2 = new Date(15,12,2030);
-        Date date3 = new Date(15,9,2020);
-        Date date4 = new Date(32,9,2020);
-        Date date5 = new Date(15,13,2020);
-        Date date6 = new Date(15,9,2019);
-        Date date7 = new Date(15,-2,2019);
-        Date date8 = new Date(0,5,2019);
-        Date date9 = new Date(-3,2,2019);
+        Date date1 = new Date(31, 10, 2022);
+        Date date2 = new Date(15, 12, 2030);
+        Date date3 = new Date(15, 9, 2020);
+        Date date4 = new Date(32, 9, 2020);
+        Date date5 = new Date(15, 13, 2020);
+        Date date6 = new Date(15, 9, 2019);
+        Date date7 = new Date(15, -2, 2019);
+        Date date8 = new Date(0, 5, 2019);
+        Date date9 = new Date(-3, 2, 2019);
 
         assertTrue(date.isDateValid());
         assertTrue(date1.isDateValid());
@@ -83,21 +83,21 @@ public class DateTest {
     }
 
     @Test
-    void equalsTest(){
-        Date date1 = new Date(9,10,2020);
+    void equalsTest() {
+        Date date1 = new Date(9, 10, 2020);
         Date date2 = null;
-        Date date3 = new Date(9,10,2030);
-        Date date4 = new Date(9,11,2020);
-        Date date5 = new Date(10,11,2020);
+        Date date3 = new Date(9, 10, 2030);
+        Date date4 = new Date(9, 11, 2020);
+        Date date5 = new Date(10, 11, 2020);
 
         assertTrue(date.equals(date));
         assertTrue(date.equals(date1));
 
-        assertFalse(date.equals(new Task("1","1")));
+        assertFalse(date.equals(new Task("1", "1")));
         assertFalse(date.equals(date2));
         assertFalse(date.equals(date3));
         assertFalse(date.equals(date4));
         assertFalse(date.equals(date5));
-        assertEquals(date1.hashCode(),date.hashCode());
+        assertEquals(date1.hashCode(), date.hashCode());
     }
 }

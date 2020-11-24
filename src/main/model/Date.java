@@ -54,12 +54,9 @@ public class Date {
             return false;
         } else if (getMonth() > 12 || getMonth() < 0) {
             return false;
-        } else if (getYear() < getCurrentDate().getYear()) {
-            return false;
         } else {
-            return true;
+            return getYear() >= getCurrentDate().getYear();
         }
-
     }
 
     //EFFECTS: Takes in a string and changes it into a date and returns it
@@ -89,7 +86,7 @@ public class Date {
         String year = dateData[2];
 
         return new Date(Integer.parseInt(day), Integer.parseInt(month),
-                Integer.parseInt(year.substring(0,4)));
+                Integer.parseInt(year.substring(0, 4)));
     }
 
     @Override

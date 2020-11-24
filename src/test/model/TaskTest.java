@@ -15,46 +15,46 @@ class TaskTest {
     @BeforeEach
     void setUp() {
         task = new IncompleteTask("1", "1");
-        task1 = new CompleteTask("2","2");
-        task2 = new InReviewTask("3","3");
+        task1 = new CompleteTask("2", "2");
+        task2 = new InReviewTask("3", "3");
     }
 
     @Test
-    public void taskConstructorTest(){
-        Task task3 = new Task("4","4","Incomplete",new Date(22,10,2020));
+    public void taskConstructorTest() {
+        Task task3 = new Task("4", "4", "Incomplete", new Date(22, 10, 2020));
         Date date = new Date();
         date = date.getCurrentDate();
 
-        assertEquals(task.getTaskTitle(),"1");
-        assertEquals(task1.getTaskTitle(),"2");
-        assertEquals(task2.getTaskTitle(),"3");
+        assertEquals(task.getTaskTitle(), "1");
+        assertEquals(task1.getTaskTitle(), "2");
+        assertEquals(task2.getTaskTitle(), "3");
 
-        assertEquals(task.getStatus(),"Incomplete");
-        assertEquals(task1.getStatus(),"Complete");
-        assertEquals(task2.getStatus(),"InReview");
+        assertEquals(task.getStatus(), "Incomplete");
+        assertEquals(task1.getStatus(), "Complete");
+        assertEquals(task2.getStatus(), "InReview");
 
         task.setDueDate(date);
         task1.setDueDate(date);
         task2.setDueDate(date);
-        assertEquals(task.getDueDate(),date);
-        assertEquals(task1.getDueDate(),date);
-        assertEquals(task2.getDueDate(),date);
+        assertEquals(task.getDueDate(), date);
+        assertEquals(task1.getDueDate(), date);
+        assertEquals(task2.getDueDate(), date);
 
-        assertEquals(task3.getDescription(),"4");
+        assertEquals(task3.getDescription(), "4");
     }
 
 
     @Test
-    public void equalsTest(){
+    public void equalsTest() {
         Date date = new Date();
         assertFalse(task.equals(task1));
         assertFalse(task.equals(task2));
 
-        Task task3 = new IncompleteTask("4","5");
+        Task task3 = new IncompleteTask("4", "5");
         assertFalse(task.equals(task3));
 
 
-        Task task4 = new IncompleteTask("1","4");
+        Task task4 = new IncompleteTask("1", "4");
         assertTrue(task.equals(task4));
         assertTrue(task.equals(task));
 
@@ -62,7 +62,7 @@ class TaskTest {
     }
 
     @Test
-    public void toStringTest(){
+    public void toStringTest() {
         assertEquals(task.toString(),
                 "Task{taskTitle='1', description='1', status='Incomplete', dueDate=null}");
     }
