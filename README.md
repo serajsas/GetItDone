@@ -37,3 +37,9 @@ user by tracking their productivity level and ensure they are aware of their inc
  - As a user, I want to be able to see the **progress** of completed tasks
  - As a user, I want to be able to **save** my to-do list to file
  - As a user, I want to be able to **load** my to-do list from file
+ 
+## _Phase 4: Task 2_ 
+
+- I have used the Map interface, and it is implemented in the TodoList class in the model package. There are many methods
+that are related to the use of the Map interface, mainly addition and removal of a task from a task list, changing a task
+to being complete, incomplete or in-review, also deleting a task and returning specific task descriptions.

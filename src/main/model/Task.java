@@ -7,6 +7,8 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.util.HashMap;
+
 public class Task implements Writable {
     public static final String COMPLETE_STRING = "Complete";
     public static final String INCOMPLETE_STRING = "Incomplete";
@@ -16,7 +18,7 @@ public class Task implements Writable {
     protected String status;
     private Date dueDate;
 
-    //EFFECTS:Constructs  task with tasktTtle and description
+    //EFFECTS:Constructs  task with taskTitle and description
     public Task(String taskTitle, String description) {
         this.taskTitle = taskTitle;
         this.description = description;
@@ -50,6 +52,7 @@ public class Task implements Writable {
     public String getDescription() {
         return description;
     }
+
 
     @Override
     public boolean equals(Object o) {
