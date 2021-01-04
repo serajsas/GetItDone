@@ -38,19 +38,4 @@ user by tracking their productivity level and ensure they are aware of their inc
 - As a user, I want to be able to **save** my to-do list to file
 - As a user, I want to be able to **load** my to-do list from file
  
-## _Phase 4: Task 2_ 
-
-- I have used the Map interface, and it is implemented in the TodoList class in the model package. There are many methods
-that are related to the use of the Map interface, mainly addition and removal of a task from a task list, changing a task
-to being complete, incomplete or in-review, also deleting a task and returning specific task descriptions.
-
-## _Phase 4: Task 3_ 
-
-- The design of the project was straight forward, and it applied very well with what we have been doing in the class. 
-I would say that I had enough time to work on the project. There is so much refactoring that could have been done, such
-as the TodoList class is handling too many methods that are not related to the class role itself rather it is also
-related to other classes such as date and other tasks. 
-- There is a lack of cohesion in the design, and this would be overcome by applying the principle that every class
-should handle only one functionality. 
-- There is too much duplication in some bits of the code and this would overcome by using abstraction and especially the 
-composite pattern. 
+![MainPag](https://user-images.githubusercontent.com/64566514/103494407-92c57700-4deb-11eb-99ed-b0cd347617d8.PNG)
